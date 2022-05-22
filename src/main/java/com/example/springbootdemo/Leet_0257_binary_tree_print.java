@@ -23,6 +23,11 @@ public class Leet_0257_binary_tree_print {
         System.out.println(ret1);
     }
 
+    /**
+     * dfs 遍历二叉树
+     * @param root
+     * @return
+     */
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> result = new ArrayList<>();
         if (root.left == null && root.right == null) {
