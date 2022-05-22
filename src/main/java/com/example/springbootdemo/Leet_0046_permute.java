@@ -2,34 +2,32 @@ package com.example.springbootdemo;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
- * 回溯 + 剪枝
- * 47. 全排列 II
- * 给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。
+ * 回溯
+ * 46. 全排列
+ * 给定一个不含重复数字的数组 nums ，返回其 所有可能的全排列 。你可以 按任意顺序 返回答案。
  */
-public class Leet_0047 {
-    public static int[] test1 = new int[]{1, 1, 2};
-    public static int[] test2 = new int[]{1, 2, 3};
-    public static int[] test3 = new int[]{1, 2, 3, 3};
+public class Leet_0046_permute {
+    public static int[] test1 = new int[]{1, 2, 3};
+    public static int[] test2 = new int[]{1, 0};
+    public static int[] test3 = new int[]{1};
 
     public static void main(String[] args) {
-        List<List<Integer>> ret1 = new Leet_0047().permuteUnique(test1);
+        List<List<Integer>> ret1 = new Leet_0046_permute().permute(test1);
         System.out.println(ret1);
 
 
-        List<List<Integer>> ret2 = new Leet_0047().permuteUnique(test2);
+        List<List<Integer>> ret2 = new Leet_0046_permute().permute(test2);
         System.out.println(ret2);
 
-        List<List<Integer>> ret3 = new Leet_0047().permuteUnique(test3);
+        List<List<Integer>> ret3 = new Leet_0046_permute().permute(test3);
         System.out.println(ret3);
     }
 
-    public List<List<Integer>> permuteUnique(int[] nums) {
+    public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
-        Arrays.sort(nums);//排序是剪枝的基础
         boolean[] visit = new boolean[nums.length];
         int[] temp = new int[nums.length];
         dfs(nums, visit, 0, temp, result);
@@ -42,10 +40,7 @@ public class Leet_0047 {
             return;
         }
         for (int i = 0; i < nums.length; i++) {
-            //已经访问过得，剪枝
-            //两个相同的数字,减去第二个数字被先使用的场景,因为会重复
-            //https://leetcode.cn/problems/permutations-ii/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liwe-2/
-            if (visit[i] || (i > 0 && nums[i] == nums[i - 1] && !visit[i - 1])) {
+            if (visit[i]) {
                 continue;
             }
             temp[level] = nums[i];
