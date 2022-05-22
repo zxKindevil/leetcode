@@ -10,8 +10,6 @@ import java.util.List;
  * <p>
  * 叶子节点 是指没有子节点的节点。
  */
-
-
 public class Leet_0257_binary_tree_print {
 
     public static void main(String[] args) {
